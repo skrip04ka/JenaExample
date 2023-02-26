@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
+import java.util.StringJoiner;
 
 import static org.apache.jena.ontology.OntModelSpec.OWL_MEM;
 
@@ -100,7 +101,12 @@ public class CreateOntologyExample {
         Iterator<Resource> iter = inf.listResourcesWithProperty(goesWith);
         while (iter.hasNext()) {
             Statement s = iter.next().getProperty(goesWith);
-            System.out.println(s.getSubject().getLocalName() + " " + s.getPredicate().getLocalName() + " " + s.getObject().asResource().getLocalName());
+
+            System.out.println(new StringJoiner(" ")
+                    .add(s.getSubject().getLocalName())
+                    .add(s.getPredicate().getLocalName())
+                    .add(s.getObject().asResource().getLocalName()));
+
 //            System.out.println(s);
         }
 
