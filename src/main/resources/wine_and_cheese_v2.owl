@@ -1,0 +1,91 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:j.0="http://jena-test#">
+  <owl:Class rdf:about="http://jena-test#OldCheese">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://jena-test#Cheese"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://jena-test#WhiteWine">
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://jena-test#RedWine"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://jena-test#Wine"/>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="http://jena-test#Wine"/>
+          <owl:Restriction>
+            <owl:onProperty>
+              <owl:DatatypeProperty rdf:about="http://jena-test#has_color"/>
+            </owl:onProperty>
+            <owl:hasValue>white</owl:hasValue>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="http://jena-test#Cheese">
+    <owl:disjointWith rdf:resource="http://jena-test#Wine"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://jena-test#YoungCheese">
+    <owl:disjointWith rdf:resource="http://jena-test#OldCheese"/>
+    <rdfs:subClassOf rdf:resource="http://jena-test#Cheese"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://jena-test#RedWine">
+    <rdfs:subClassOf rdf:resource="http://jena-test#Wine"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="http://jena-test#Wine"/>
+          <owl:Restriction>
+            <owl:onProperty>
+              <owl:DatatypeProperty rdf:about="http://jena-test#has_color"/>
+            </owl:onProperty>
+            <owl:hasValue>red</owl:hasValue>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://jena-test#goes_with">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://jena-test#has_color">
+    <rdfs:domain rdf:resource="http://jena-test#Wine"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <j.0:OldCheese rdf:about="http://jena-test#parmesan">
+    <j.0:goes_with>
+      <j.0:Wine rdf:about="http://jena-test#AbrauDurso">
+        <j.0:goes_with>
+          <j.0:OldCheese rdf:about="http://jena-test#premiumParmesan">
+            <j.0:goes_with rdf:resource="http://jena-test#AbrauDurso"/>
+          </j.0:OldCheese>
+        </j.0:goes_with>
+        <j.0:has_color>red</j.0:has_color>
+      </j.0:Wine>
+    </j.0:goes_with>
+    <owl:sameAs rdf:resource="http://jena-test#premiumParmesan"/>
+  </j.0:OldCheese>
+  <j.0:YoungCheese rdf:about="http://jena-test#DorBlue">
+    <j.0:goes_with>
+      <j.0:Wine rdf:about="http://jena-test#UsWine1974">
+        <j.0:goes_with rdf:resource="http://jena-test#DorBlue"/>
+        <j.0:has_color>white</j.0:has_color>
+        <owl:sameAs>
+          <j.0:Wine rdf:about="http://jena-test#BeaulieuVineyard">
+            <j.0:goes_with rdf:resource="http://jena-test#DorBlue"/>
+            <j.0:has_color>white</j.0:has_color>
+          </j.0:Wine>
+        </owl:sameAs>
+      </j.0:Wine>
+    </j.0:goes_with>
+  </j.0:YoungCheese>
+</rdf:RDF>
